@@ -350,6 +350,18 @@ pub struct TemplateProcessing {
     special_tokens: Tokens,
 }
 
+impl From<&str> for TemplateProcessingBuilderError {
+    fn from(e: &str) -> Self {
+        e.to_string().into()
+    }
+}
+
+impl PartialEq for TemplateProcessingBuilderError {
+    fn eq(&self, other: &Self) -> bool {
+        self.to_string() == other.to_string()
+    }
+}
+
 /// We use this custom deserializer to provided the values for `added_single`
 /// and `added_pair` during deserialization, while not having to serialize them
 #[doc(hidden)]
